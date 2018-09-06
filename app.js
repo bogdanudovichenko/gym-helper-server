@@ -29,6 +29,8 @@ http.createServer((request, response) => {
                 response.end(err);
             }
         });
+    } else if(request.method === 'GET') {
+        response.end('Hi!');
     }
 }).listen(8098);
 
