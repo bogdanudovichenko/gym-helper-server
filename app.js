@@ -5,6 +5,11 @@ const fs = require('fs');
 const key = process.env.GOOGLE_API_KEY || fs.readFileSync('./secret', 'utf8');
 
 http.createServer((request, response) => {
+    response.setHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader("Access-Control-Allow-Credentials", "true");
+    response.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+
     if (request.method === 'POST') {
         let bodyJson = '';
 
@@ -30,8 +35,12 @@ http.createServer((request, response) => {
             }
         });
     } else if(request.method === 'GET') {
+        res.writeHead(200)
         response.end('Hi!');
-    }
+    } else  if ( req.method === 'OPTIONS' ) {
+		res.writeHead(200);
+		res.end();
+	}
 }).listen(process.env.PORT || 8098);
 
 function onHttpPost(body) {
