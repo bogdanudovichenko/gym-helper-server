@@ -9,6 +9,7 @@ const fs = require('fs');
 const key = process.env.GOOGLE_API_KEY || fs.readFileSync('./secret', 'utf8');
 
 app.use(cors());
+app.use(bodyParser({limit: '5mb'}));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
