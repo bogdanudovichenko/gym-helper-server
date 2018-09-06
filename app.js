@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 const http = require('http');
 const fs = require('fs');
 
-const key = fs.readFileSync('./secret', 'utf8');
+const key = process.env.GOOGLE_API_KEY || fs.readFileSync('./secret', 'utf8');
 
 http.createServer((request, response) => {
     if (request.method === 'POST') {
