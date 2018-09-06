@@ -32,7 +32,7 @@ http.createServer((request, response) => {
     } else if(request.method === 'GET') {
         response.end('Hi!');
     }
-}).listen(8098);
+}).listen(process.env.PORT || 8098);
 
 function onHttpPost(body) {
     return new Promise((res, rej) => {
